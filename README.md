@@ -1,5 +1,5 @@
-# Jservice.io is no longer running
-Sorry for the inconvenience. 
+# Jservice
+# TODO: Update Readme file
 
 
 ### Requirements

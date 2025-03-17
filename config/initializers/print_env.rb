@@ -1,0 +1,5 @@
+puts "Current RAILS_ENV: #{ENV['RAILS_ENV'] || Rails.env}"
+puts "Current POSTGRES_HOST: #{ENV['POSTGRES_HOST']}"
+puts "Current POSTGRES_PASSWORD_FILE: #{ENV['POSTGRES_PASSWORD_FILE']}"
+puts "Current POSTGRES_USER: #{ENV['POSTGRES_USER']}"
+puts "Current POSTGRES_DB: #{ENV['POSTGRES_DB']}"

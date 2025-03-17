@@ -1,0 +1,41 @@
+name: jservice
+
+services:
+  jservice-db:
+    image: postgres:17
+    container_name: jservice-db
+    restart: unless-stopped
+    volumes:
+      - jservice-db:/var/lib/postgresql/data
+    networks:
+      - ${NETWORK_NAME:-jservice-network}
+    env_file: 
+      - path: ./env/db.env
+    secrets:
+       - db_password
+
+  jservice:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jservice
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    networks:
+      - ${NETWORK_NAME:-jservice-network}
+    depends_on:
+      - jservice-db
+    env_file: 
+      - path: ./env/db.env
+      - path: ./env/jservice.env
+    secrets:
+       - db_password
+
+secrets:
+   db_password:
+     file: secrets/db_password.txt
+
+volumes:
+  jservice-db:
+    name: jservice-db

@@ -1,0 +1,6 @@
+.git
+docker-compose*.yml
+.dockerignore
+.DS_Store
+/secrets
+/backups

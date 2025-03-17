@@ -1,0 +1,30 @@
+services:
+  jservice-adminer:
+    image: adminer:5
+    container_name: jservice-adminer
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    networks:
+      - ${NETWORK_NAME:-jservice-network}
+
+  jservice:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/app
+      - jservice-bundle:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    command: bundle exec rails server -b 0.0.0.0
+    tty: true
+    stdin_open: true
+
+volumes:
+  jservice-bundle: 
+    name: jservice-bundle
+
+networks:
+  jservice-network:
+    driver: bridge
