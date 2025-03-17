@@ -56,30 +56,25 @@
 		  	end
 		
 		  	questions.each do |q|
-		  		
-		  		qdiv = q.css('div').first
+				var_answer = q.css('.correct_response').text()
 		
-		  		if(!qdiv.nil?)
-		  			qdivMouseover = qdiv.attr('onmouseover')
-		  			#=========== Set Answer =============
-		  			answermatch = /ponse">(.*)<\/e/.match(qdivMouseover)
-		  			var_answer = answermatch.captures[0].to_s
-		 
-		  			#puts var_answer
-					var_question = q.css('.clue_text').text()
-					index =	q.xpath('count(preceding-sibling::*)').to_i
-					var_category = categoryArr[index]
-					var_value = q.css('.clue_value').text[/[0-9\.]+/]
+				var_question = q.css('.clue_text:not(:has(*))').text()
+				index =	q.xpath('count(preceding-sibling::*)').to_i
+				var_category = categoryArr[index]
+				var_value = q.css('.clue_value').text[/[0-9\.]+/]
 
-					newClue = Clue.where(
-						:question => var_question,
-						:answer => var_answer,
-						:category => var_category,
-						:value => var_value,
-						:airdate => var_airdate,
-						:game_id => gid
-					).first_or_create
-		  		end
+				if var_question.empty? || var_answer.empty?
+					next
+				end
+
+				newClue = Clue.where(
+					:question => var_question,
+					:answer => var_answer,
+					:category => var_category,
+					:value => var_value,
+					:airdate => var_airdate,
+					:game_id => gid
+				).first_or_create
 		  	end
 		 end #each
 	  end #if
