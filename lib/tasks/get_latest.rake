@@ -1,5 +1,70 @@
 
 
+# Section: Questions
+
+def sanitize_question(raw_question)
+	# Trim leading and trailing whitespaces
+	sanitized = raw_question.strip
+
+	sanitized
+end
+
+def valid_question?(subject)
+	# Check if the string is less than 3 characters
+	return false if subject.strip.length < 3
+
+	true
+end
+
+# End Section: Questions
+
+# Section: Answers
+
+def sanitize_answer(raw_answer)
+	# Remove quotes from start and end of string
+	sanitized = raw_answer.gsub(/^"(.+)"$/, '\1')
+
+	# Remove all text wrapped with (), [] or {}
+	sanitized = sanitized
+		.gsub(/\s*\(.*?\)\s*/, ' ')
+		.gsub(/\s*\[.*?\]\s*/, ' ')
+		.gsub(/\s*\{.*?\}\s*/, ' ')
+
+	# Remove specific characters: ()[]{}
+	sanitized = sanitized.delete('()[]{}')
+
+	# Remove multiple spaces
+	sanitized = sanitized.gsub(/\s+/, ' ')
+
+	# Trim leading and trailing whitespaces
+	sanitized = sanitized.strip
+
+	sanitized
+end
+  
+def valid_answer?(subject, sanitized)
+	# Check if the string is less than 1 character
+	return false if subject.strip.length < 1
+
+	# Check if the string contains / or \ characters
+	return false if subject.include?('/') || subject.include?('\\')
+
+	# Check if the string contains " of)" - this is a common pattern for multiple choice answers
+	return false if subject.include?(" of)")
+
+	# Check if the answer contains non-ASCII characters
+	return false if subject.match?(/[^[:ascii:]]/)
+
+	if sanitized
+		# Check if contains more than 4 words
+		return false if subject.split.length > 4
+	end
+
+	# If none of the above conditions are met, the answer is valid
+	true
+end
+
+# End Section: Answers
 
  #Arguments are seasons to grab. [1,30] grabs seasons 1 through 30
   task :get_clues, [:arg1,:arg2]  => :environment  do |t, args|
@@ -56,14 +121,53 @@
 		  	end
 		
 		  	questions.each do |q|
-				var_answer = q.css('.correct_response').text()
-		
 				var_question = q.css('.clue_text:not(:has(*))').text()
+				var_answer = q.css('.correct_response').text()
 				index =	q.xpath('count(preceding-sibling::*)').to_i
 				var_category = categoryArr[index]
 				var_value = q.css('.clue_value').text[/[0-9\.]+/]
 
-				if var_question.empty? || var_answer.empty?
+				# Question
+
+				if !valid_question?(var_question)
+					if var_question.length > 0
+						puts "⛔️ Invalid raw question: " + var_question
+					end
+					next
+				end
+
+				old_question = var_question
+				var_question = sanitize_question(var_question)
+				if old_question != var_question
+					puts "\n❓ Question sanitized:\n" + old_question + "\n⬇️\n" + var_question + "\n\n"
+				end
+
+				if !valid_question?(var_question)
+					if var_question.length > 0
+						puts "⛔️ Invalid sanitized question: " + var_question
+					end
+					next
+				end
+
+				# Answer
+
+				if !valid_answer?(var_answer, sanitized = false)
+					if var_answer.length > 0
+						puts "⛔️ Invalid raw answer: " + var_answer
+					end
+					next
+				end
+
+				old_answer = var_answer
+				var_answer = sanitize_answer(var_answer)
+				if old_answer != var_answer
+					# puts "\n🔍 Answer sanitized:\n" + old_answer + "\n⬇️\n" + var_answer + "\n\n"
+				end
+
+				if !valid_answer?(var_answer, sanitized = true)
+					if var_answer.length > 0
+						puts "⛔️ Invalid sanitized answer: " + var_answer
+					end
 					next
 				end
 
