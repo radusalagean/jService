@@ -79,6 +79,7 @@ end
   	  	#get game list
   	  	gameIds = Array.new
 	  	for i in args.arg1.to_i..args.arg2.to_i
+			sleep(rand(1..3))
 	  		seasonsUrl = 'http://j-archive.com/showseason.php?season='+i.to_s
 	  		seasonList = Nokogiri::HTML(URI.open(seasonsUrl), nil, "UTF-8")
 	  		linkList = seasonList.css('table td a')
@@ -91,6 +92,8 @@ end
 	  	end
 	  	
 	  	gameIds.each do |gid|
+			sleep(rand(1..3))
+
 		  	gameurl = 'http://www.j-archive.com/showgame.php?game_id='+gid.to_s
 		  	game = Nokogiri::HTML(URI.open(gameurl), nil, "UTF-8")
 		  	
