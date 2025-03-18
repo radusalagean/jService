@@ -7,6 +7,7 @@ services:
     restart: unless-stopped
     volumes:
       - jservice-db:/var/lib/postgresql/data
+      - ./backups:/db-dump
     networks:
       - ${NETWORK_NAME:-jservice-network}
     env_file: 
