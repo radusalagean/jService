@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2015_07_07_042456) do
+ActiveRecord::Schema[8.0].define(version: 2015_07_07_042456) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
+  enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
-  enable_extension "plpgsql"
 
   create_table "categories", id: :serial, force: :cascade do |t|
     t.string "title"
@@ -48,5 +48,4 @@ ActiveRecord::Schema[7.0].define(version: 2015_07_07_042456) do
     t.datetime "updated_at", precision: nil, null: false
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
   end
-
 end

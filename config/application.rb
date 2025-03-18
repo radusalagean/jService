@@ -35,9 +35,6 @@ module JArchive
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-    
-    #needed for rails 6.1+
-    config.active_record.legacy_connection_handling = false
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
