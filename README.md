@@ -5,6 +5,7 @@ A fork of [sottenad/jService](https://github.com/sottenad/jService) used for edu
 ## Required files
 ```
 secrets/db_password.txt
+config/master.key
 ```
 
 ## Run
@@ -38,3 +39,5 @@ bundle exec rake get_clues[1,2]
 - Update the Ruby version used in `Dockerfile` to match the one we migrated to earlier (for production image)
 - Commit & Push
 - Deploy to staging server and test, then to prod server
+  - Build with `docker compose --env-file ./env/jservice.env --env-file ./env/db.env build --no-cache`
+  - Ansible playbook task of the server should already call the above command through the `community.docker.docker_compose_v2` module, so it shouldn't be run manually
