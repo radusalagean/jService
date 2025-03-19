@@ -13,6 +13,8 @@ RUN apt-get update -qq && apt-get install -y \
 ARG COMMIT_HASH
 ENV COMMIT_HASH=$COMMIT_HASH
 
+RUN echo $COMMIT_HASH > /app/commit_hash.txt
+
 ARG RAILS_ENV
 ENV RAILS_ENV=$RAILS_ENV
 
