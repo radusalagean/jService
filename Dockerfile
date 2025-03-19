@@ -10,6 +10,9 @@ RUN apt-get update -qq && apt-get install -y \
     postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
+ARG COMMIT_HASH
+ENV COMMIT_HASH=$COMMIT_HASH
+
 ARG RAILS_ENV
 ENV RAILS_ENV=$RAILS_ENV
 

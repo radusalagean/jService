@@ -20,6 +20,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
+        COMMIT_HASH: ${COMMIT_HASH}
         RAILS_ENV: ${RAILS_ENV}
         RACK_ENV: ${RACK_ENV}
         POSTGRES_USER: ${POSTGRES_USER}
