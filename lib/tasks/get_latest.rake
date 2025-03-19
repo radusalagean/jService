@@ -164,7 +164,7 @@ end
 				old_answer = var_answer
 				var_answer = sanitize_answer(var_answer)
 				if old_answer != var_answer
-					puts "\n🔍 REV 1 Answer sanitized:\n" + old_answer + "\n⬇️\n" + var_answer + "\n\n"
+					puts "\n🔍 Answer sanitized:\n" + old_answer + "\n⬇️\n" + var_answer + "\n\n"
 				end
 
 				if !valid_answer?(var_answer, sanitized = true)
