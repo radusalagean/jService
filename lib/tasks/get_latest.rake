@@ -55,10 +55,10 @@ def valid_answer?(subject, sanitized)
 	# Check if the answer contains non-ASCII characters
 	return false if subject.match?(/[^[:ascii:]]/)
 
-	if sanitized
-		# Check if contains more than 4 words
-		return false if subject.split.length > 4
-	end
+	# if sanitized
+	# 	# Check if contains more than 4 words
+	# 	return false if subject.split.length > 4
+	# end
 
 	# If none of the above conditions are met, the answer is valid
 	true
