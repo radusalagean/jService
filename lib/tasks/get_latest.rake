@@ -134,7 +134,7 @@ end
 
 				if !valid_question?(var_question)
 					if var_question.length > 0
-						puts "⛔️ Invalid raw question: " + var_question
+						# puts "⛔️ Invalid raw question: " + var_question
 					end
 					next
 				end
@@ -142,12 +142,12 @@ end
 				old_question = var_question
 				var_question = sanitize_question(var_question)
 				if old_question != var_question
-					puts "\n❓ Question sanitized:\n" + old_question + "\n⬇️\n" + var_question + "\n\n"
+					# puts "\n❓ Question sanitized:\n" + old_question + "\n⬇️\n" + var_question + "\n\n"
 				end
 
 				if !valid_question?(var_question)
 					if var_question.length > 0
-						puts "⛔️ Invalid sanitized question: " + var_question
+						# puts "⛔️ Invalid sanitized question: " + var_question
 					end
 					next
 				end
@@ -156,7 +156,7 @@ end
 
 				if !valid_answer?(var_answer, sanitized = false)
 					if var_answer.length > 0
-						puts "⛔️ Invalid raw answer: " + var_answer
+						# puts "⛔️ Invalid raw answer: " + var_answer
 					end
 					next
 				end
@@ -169,7 +169,7 @@ end
 
 				if !valid_answer?(var_answer, sanitized = true)
 					if var_answer.length > 0
-						puts "⛔️ Invalid sanitized answer: " + var_answer
+						# puts "⛔️ Invalid sanitized answer: " + var_answer
 					end
 					next
 				end
