@@ -13,6 +13,9 @@ RUN apt-get update -qq && apt-get install -y \
 ARG COMMIT_HASH
 ENV COMMIT_HASH=$COMMIT_HASH
 
+# Set working directory
+WORKDIR /app
+
 RUN echo $COMMIT_HASH > /app/commit_hash.txt
 
 ARG RAILS_ENV
@@ -32,9 +35,6 @@ ENV POSTGRES_DB=$POSTGRES_DB
 
 ARG POSTGRES_HOST
 ENV POSTGRES_HOST=$POSTGRES_HOST
-
-# Set working directory
-WORKDIR /app
 
 # Copy Gemfile and Gemfile.lock
 COPY Gemfile Gemfile.lock ./
