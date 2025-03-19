@@ -39,5 +39,5 @@ bundle exec rake get_clues[1,2]
 - Update the Ruby version used in `Dockerfile` to match the one we migrated to earlier (for production image)
 - Commit & Push
 - Deploy to staging server and test, then to prod server
-  - Build with `docker compose --env-file ./env/jservice.env --env-file ./env/db.env build --no-cache`
-  - Ansible playbook task of the server should already call the above command through the `community.docker.docker_compose_v2` module, so it shouldn't be run manually
+  - Build with `docker compose --env-file ./env/jservice.env --env-file ./env/db.env -f docker-compose.yml -f docker-compose.prod.yml build --no-cache`
+  - Ansible playbook task of the server should already call the above command, so it shouldn't be run manually
