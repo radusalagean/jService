@@ -30,8 +30,6 @@ services:
         - db_password
     container_name: jservice
     restart: unless-stopped
-    ports:
-      - 3000:3000
     networks:
       - ${NETWORK_NAME:-jservice-network}
     depends_on:
