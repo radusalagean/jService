@@ -36,6 +36,6 @@ trap cleanup EXIT
 
 echo "Restoring database from $BACKUP_PATH ..."
 cp "$BACKUP_PATH" ./backups/.restore.dump
-docker exec jservice-db sh -c "PGPASSWORD=\$(cat \$POSTGRES_PASSWORD_FILE) pg_restore -U \$POSTGRES_USER -h \$POSTGRES_HOST -d \$POSTGRES_DB --clean --if-exists -F c \"/db-dump/.restore.dump\""
+docker exec jservice-db sh -c "PGPASSWORD=\$(cat \$POSTGRES_PASSWORD_FILE) pg_restore -U \$POSTGRES_USER -h \$POSTGRES_HOST -d \$POSTGRES_DB --clean --if-exists -F c \"/backups/.restore.dump\""
 
 echo "Restore complete."
