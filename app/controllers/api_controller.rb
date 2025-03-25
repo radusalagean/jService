@@ -8,10 +8,16 @@ class ApiController < ApplicationController
       count = 100
     end
 
-    
-    #@result = Clue.from('"clues" TABLESAMPLE SYSTEM (100)').limit(count)
+    max_words = params[:max_words].present? ? params[:max_words].to_i : nil
 
-    @result = Clue.order(Arel.sql('RANDOM()')).limit(count)
+    query = Clue.order(Arel.sql('RANDOM()'))
+
+    if max_words
+      query = query.where("array_length(string_to_array(answer, ' '), 1) <= ?", max_words)
+    end
+
+    @result = query.limit(count)
+
     respond_to do |format|
       format.json { render :json => @result.to_json(:include => :category) }
     end
