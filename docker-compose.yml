@@ -16,18 +16,7 @@ services:
        - db_password
 
   jservice:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        RAILS_ENV: ${RAILS_ENV}
-        RACK_ENV: ${RACK_ENV}
-        POSTGRES_USER: ${POSTGRES_USER}
-        POSTGRES_PASSWORD_FILE: ${POSTGRES_PASSWORD_FILE}
-        POSTGRES_DB: ${POSTGRES_DB}
-        POSTGRES_HOST: ${POSTGRES_HOST}
-      secrets:
-        - db_password
+    image: ghcr.io/radusalagean/jservice:latest
     container_name: jservice
     restart: unless-stopped
     networks:
