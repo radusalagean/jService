@@ -63,6 +63,7 @@ jobs:
             POSTGRES_PASSWORD_FILE=/run/secrets/db_password
             POSTGRES_DB=jarchive
             POSTGRES_HOST=jservice-db
+            SECRET_KEY_BASE=dummy
           secrets: |
             db_password=.secrets/db_password
           cache-from: type=gha
