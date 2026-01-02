@@ -72,7 +72,7 @@ jobs:
       - name: Deploy to server
         uses: appleboy/ssh-action@v1
         with:
-          host: ${{ secrets.SSH_HOST }}
+          host: ${{ vars.SSH_HOST }}
           username: github-actions
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
