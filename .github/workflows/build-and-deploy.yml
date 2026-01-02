@@ -52,6 +52,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -79,7 +80,7 @@ jobs:
             cd /rs-projects/jservice
             git pull origin master
             export NETWORK_NAME=open-live-trivia_network
-            export COMPOSE_OPTS="--env-file ./env/jservice.env --env-file ./env/db.env -f docker-compose.yml -f docker-compose.prod.yml"
+            export COMPOSE_OPTS="--env-file /rs-projects_config/jservice/env/jservice.env --env-file ./env/db.env -f docker-compose.yml -f /rs-projects_config/jservice/docker-compose.prod.yml"
             docker compose $COMPOSE_OPTS pull
             docker compose $COMPOSE_OPTS up -d
             docker image prune --force || echo "⚠️ Image prune failed"
