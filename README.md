@@ -41,4 +41,4 @@ bundle exec rake get_clues[1,2]
 - Commit & Push
 - Deploy to staging server and test, then to prod server
   - Build with `docker compose --env-file ./env/jservice.env --env-file ./env/db.env -f docker-compose.yml -f docker-compose.prod.yml build --no-cache`
-  - Ansible playbook task of the server should already call the above command, so it shouldn't be run manually
+  - For prod, the [CI/CD build script](.github/workflows/build-and-deploy.yml) should already handle this
