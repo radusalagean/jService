@@ -75,13 +75,5 @@ jobs:
           host: ${{ vars.SSH_HOST }}
           username: github-actions
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            set -e
-            cd /rs-projects/jservice
-            git pull origin master
-            export NETWORK_NAME=open-live-trivia_network
-            export COMPOSE_OPTS="--env-file /rs-projects_config/jservice/env/jservice.env --env-file ./env/db.env -f docker-compose.yml -f /rs-projects_config/jservice/docker-compose.prod.yml"
-            docker compose $COMPOSE_OPTS pull
-            docker compose $COMPOSE_OPTS up -d
-            docker image prune --force || echo "⚠️ Image prune failed"
+          script: /rs-projects_config/jservice/start-services.sh
 
