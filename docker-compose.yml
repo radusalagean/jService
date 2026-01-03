@@ -9,7 +9,7 @@ services:
       - jservice-db:/var/lib/postgresql/data
       - ./backups:/backups
     networks:
-      - ${NETWORK_NAME:-jservice-network}
+      - jservice-network
     env_file: 
       - path: ./env/db.env
     secrets:
@@ -20,7 +20,7 @@ services:
     container_name: jservice
     restart: unless-stopped
     networks:
-      - ${NETWORK_NAME:-jservice-network}
+      - jservice-network
     depends_on:
       - jservice-db
     env_file: 
