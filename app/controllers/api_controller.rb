@@ -19,7 +19,8 @@ class ApiController < ApplicationController
     @result = query.limit(count)
 
     respond_to do |format|
-      format.json { render :json => @result.to_json(:include => :category) }
+      # format.json { render :json => @result.to_json(:include => :category) }
+      format.json { render :json => "TEST" }
     end
   end
 
