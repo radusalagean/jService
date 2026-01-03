@@ -6,7 +6,7 @@ services:
     ports:
       - 8080:8080
     networks:
-      - ${NETWORK_NAME:-jservice-network}
+      - jservice-network
 
   jservice:
     build:

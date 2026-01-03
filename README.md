@@ -16,7 +16,8 @@ config/master.key
 ```sh
 bundle exec rake get_clues[1,2]
 ```
-- Or use the `restore-db.sh` script if you already have a database backup file that you want to restore
+- Or use the `restore-db.sh <backup-file>` script if you already have a database backup file that you want to restore.
+  - The backup file has to be located in the mounted directory for backups (e.g. `./backups` for local env, prod env may have a different mount)
 
 ## Update Ruby and Rails versions
 - See outdated dependencies: `docker exec jservice bundle outdated`
