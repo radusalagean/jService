@@ -75,5 +75,5 @@ jobs:
           host: ${{ vars.SSH_HOST }}
           username: github-actions
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: /rs-projects_config/jservice/start-services.sh
+          script: /rs-projects/jservice/overrides/start-services.sh
 
